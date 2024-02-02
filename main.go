@@ -1,10 +1,7 @@
 package main
 
-import (
-	"fmt"
-)
+import "github.com/blairoo/learngo/banking"
 
 func main() {
-	nico := map[string]string{"name": "nico", "age": "12"}
-	fmt.Println(nico)
+	account := banking.Account{owner: "nicolas", balance: 1000}
 }
