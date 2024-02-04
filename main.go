@@ -1,7 +1,19 @@
 package main
 
-import "github.com/blairoo/learngo/banking"
+import (
+	"fmt"
+	"log"
+
+	"github.com/blairoo/learngo/accounts"
+)
 
 func main() {
-	account := banking.Account{owner: "nicolas", balance: 1000}
+	account := accounts.NewAccount("nico")
+	account.Deposit(10)
+	fmt.Println(account.Balance())
+	err := account.Withdraw(20)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(account.Balance())
 }
