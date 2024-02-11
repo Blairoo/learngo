@@ -1,20 +1,25 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-
-	"github.com/blairoo/learngo/mydict"
+	"time"
 )
 
+var errRequestFailed = errors.New("Request Fail")
+
 func main() {
-	dictionary := mydict.Dictionary{}
-	baseWord := "hello"
-	dictionary.Add(baseWord, "First")
-	dictionary.Search(baseWord)
-	dictionary.Delete(baseWord)
-	word, err := dictionary.Search(baseWord)
-	if err != nil {
-		fmt.Println(err)
+	c := make(chan string)
+	people := [2]string{"nico", "flynn"}
+	for _, person := range people {
+		go isSexy(person, c)
 	}
-	fmt.Println(word)
+	for i := 0; i < len(people); i++ {
+		fmt.Println(<-c)
+	}
+}
+
+func isSexy(person string, c chan string) {
+	time.Sleep(time.Second * 5)
+	c <- person + " is sexy"
 }
